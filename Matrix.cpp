@@ -3,7 +3,7 @@
 Matrix::Matrix() : _rows(1), _cols(1)
 {
     AllocateMemory();
-    this.elements[0][0] = 0;
+    elements[0][0] = 0;
 }
 
 Matrix::Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols)
@@ -16,7 +16,7 @@ Matrix::Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols)
     {
       for (j = 0; j < _cols; j++)
       {
-        this.elements[i][j] = 0;
+        elements[i][j] = 0;
       }
     }
 }
@@ -31,7 +31,7 @@ Matrix::Matrix(const Matrix& m) : _rows(m._rows), _cols(m._cols)
     {
       for (j = 0; j < _cols; j++)
       {
-        this.elements[i][j] = m.elements[i][j];
+        elements[i][j] = m.elements[i][j];
       }
     }
 }
@@ -41,32 +41,32 @@ Matrix::~Matrix()
     int i;
     for (i = 0; i < _rows; i++)
     {
-      delete[] this.elements[i];
+      delete[] elements[i];
     }
-    delete[] this.elements;
+    delete[] elements;
 }
 
 size_t num_cols()
 {
-  return this._cols;
+  //return _cols;
 }
 
 size_t num_rows()
 {
-  return this._rows;
+  //return _rows;
 }
 
 Matrix Matrix::Transpose()
 {
     int i;
-    int j
+    int j;
 
     Matrix tempMatrix(_cols, _rows);
     for (i = 0; i < _rows; i++)
     {
         for (j = 0; j < _cols; j++)
         {
-            tempMatrix[j][i] = this.elements[i][j];
+            tempMatrix.elements[j][i] = elements[i][j];
         }
     }
     return tempMatrix;
@@ -121,9 +121,9 @@ void Matrix::AllocateMemory()
 {
     int i;
 
-    this.elements = new double*[_rows];
+    elements = new double*[_rows];
     for (i = 0; i < _rows; i++)
     {
-        this.elements[i] = new double[_cols];
+        elements[i] = new double[_cols];
     }
 }
