@@ -2,34 +2,38 @@
 #define _MATRIX_H
 
 #include <iostream>
-#include <vector>
-#include <cstdlib>
 
 class Matrix
 {
 	private:
-		std::vector< std::vector<int> > elements;
-		std::size_t rows;
-		std::size_t cols;
+		std::size_t _rows;
+		std::size_t _cols;
+		double **elements;
+		void AllocateMemory();
 
 	public:
-
+		Matrix();
 		Matrix(size_t rows, size_t cols);
-		// : elements(std::vector< std::vector<int> > (rows, std::vector(cols))) {}
-		Matrix(std::vector< std::vector<int> > vector);
+		Matrix(const Matrix&);
 		~Matrix();
 
-		int num_cols();
-		int num_rows();
-		const std::vector< std::vector<int> >& get_elements();
-
-		void equals(Matrix& v);
-
+		size_t num_rows();
+		size_t num_cols();
+		
+		/* Simple modifiers */
 		Matrix Transpose();
-		Matrix Add(std::vector< std::vector<int> > v);
-  		Matrix Multiply_Scalar(int scalar);
-  		Matrix Multiply(std::vector< std::vector<int> > v);
-  		Matrix Kronecker_Multiplication(std::vector< std::vector<int> > v);
-  		Matrix Horizontal_Concatenation(std::vector< std::vector<int> > v);
+		Matrix Inverse();
+		
+		/* Basic operations */
+		Matrix Add(const Matrix&);
+		Matrix Subtract(const Matrix&);
+  		Matrix Multiply(const Matrix&);
+  		Matrix Divide(const Matrix&);
+
+  		/* Additional operations */
+  		double DotProduct(Matrix, Matrix, int);
+  		Matrix Multiply_Scalar(int);
+  		Matrix Kronecker_Multiplication(const Matrix&);
+  		Matrix Horizontal_Concatenation(const Matrix&);
 };
 #endif

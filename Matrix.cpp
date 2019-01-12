@@ -1,117 +1,129 @@
 #include "Matrix.h"
 
-Matrix::Matrix(size_t rows, size_t cols)
+Matrix::Matrix() : _rows(1), _cols(1)
 {
-    // TODO: init a matrix of provided size with values all 0
+    AllocateMemory();
+    this.elements[0][0] = 0;
 }
 
-Matrix::Matrix(std::vector< std::vector<int > v)
-{
-    this.elements = v;
-    this.rows = v.size();
-    this.cols = v[0].size();
-}
-
-
-Matrix::Transpose(std::vector< std::vector<int> > v)
+Matrix::Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols)
 {
     int i;
     int j;
 
-    std::vector<std::vector<int> > result(v[0].size(), vector<int>(v.size(), 0));
-
-    for (i = 0; i < new_height; i++)
+    AllocateMemory();
+    for (i = 0; i < _rows; i++)
     {
-        for (j = 0; j < i; j++)
-        {
-            result[i][j] = m[j][i];
-        }
+      for (j = 0; j < _cols; j++)
+      {
+        this.elements[i][j] = 0;
+      }
     }
-    return result;
 }
 
-Matrix::Add(std::vector< std::vector<int> > m2)
+Matrix::Matrix(const Matrix& m) : _rows(m._rows), _cols(m._cols)
 {
     int i;
     int j;
 
-    if (m1.size() == m2.size() && m1[0].size() == m2[0].size())
+    AllocateMemory();
+    for (i = 0; i < _rows; i++)
     {
-        vector<vector<int> > result(m1.size(), vector<int>(m1[0].size(), 0));
+      for (j = 0; j < _cols; j++)
+      {
+        this.elements[i][j] = m.elements[i][j];
+      }
+    }
+}
 
-        for (i = 0; i < m1.size(); i++)
+Matrix::~Matrix()
+{
+    int i;
+    for (i = 0; i < _rows; i++)
+    {
+      delete[] this.elements[i];
+    }
+    delete[] this.elements;
+}
+
+size_t num_cols()
+{
+  return this._cols;
+}
+
+size_t num_rows()
+{
+  return this._rows;
+}
+
+Matrix Matrix::Transpose()
+{
+    int i;
+    int j
+
+    Matrix tempMatrix(_cols, _rows);
+    for (i = 0; i < _rows; i++)
+    {
+        for (j = 0; j < _cols; j++)
         {
-            for (j = 0; j < m1[0].size(); j++)
-            {
-                result[i][j] = m1[i][j] + m2[i][j];
-            }
+            tempMatrix[j][i] = this.elements[i][j];
         }
-
-    return result;
     }
+    return tempMatrix;
 }
 
-vector<vector<int> > Matrix::Multiply(vector<vector<int> > m1, vector<vector<int> > m2)
+Matrix Matrix::Inverse()
 {
-  int i;
-  int j;
-  int k;
-
-  if (m1.size() == m2[0].size())
-  {
-    vector<vector<int> > result(m1[0].size(), vector<int>(m2.size(), 0));
-
-    for (i = 0; i < m1[0].size(); i++)
-      for (j = 0; j < m1.size(); j++)
-        for (k = 0; k < m1[0].size(); k++)
-          result[i][j] += m1[i][k] * m2[k][j];
-
-    return result;
-  }
+    // TODO
 }
 
-vector<vector<int> > Matrix::Multiply_Scalar(vector<vector<int> > m, int scalar)
+Matrix Matrix::Add(const Matrix& m)
 {
-  int i;
-  int j;
-
-  vector<vector<int> > result(m);
-
-  for (i = 0; i < m.size(); i++)
-    for (j = 0; j < m[0].size(); j++)
-      result[i][j] = m[i][j] * scalar;
-
-  return result;
+    // TODO
 }
 
-vector<vector<int> > Matrix::Kronecker_Multiplication(vector<vector<int> > m1, vector<vector<int> > m2)
+Matrix Matrix::Subtract(const Matrix& m)
 {
-  return m1;
+    // TODO
 }
 
-vector<vector<int> > Matrix::Horizontal_Concatenation(vector<vector<int> > m1, vector<vector<int> > m2)
+Matrix Matrix::Multiply(const Matrix& m)
 {
-  int i;
-  int j;
+    // TODO
+}
 
-  if (m1[0].size() == m2[0].size())
-  {
-    vector<vector<int> > result ((m1.size() + m2.size()), vector<int> (m1[0].size(), 0));
+Matrix Matrix::Divide(const Matrix& m)
+{
+    // TODO
+}
 
-    for (j = 0; j < m1[0].size(); j++)
+double Matrix::DotProduct(Matrix m1, Matrix m2, int s)
+{
+    // TODO
+}
+
+Matrix Matrix::Multiply_Scalar(int s)
+{
+    // TODO
+}
+
+Matrix Matrix::Kronecker_Multiplication(const Matrix& m)
+{
+    // TODO
+}
+
+Matrix Matrix::Horizontal_Concatenation(const Matrix&)
+{
+    // TODO
+}
+
+void Matrix::AllocateMemory()
+{
+    int i;
+
+    this.elements = new double*[_rows];
+    for (i = 0; i < _rows; i++)
     {
-      for (i = 0; i < m1.size(); i++)
-        result[i][j] = m1[i][j];
-      for (i = m1.size(); i < m1.size() + m2.size(); i++)
-        result[i][j] = m2[i][j];
+        this.elements[i] = new double[_cols];
     }
-
-    return result;
-
-  }
-}
-
-~Matrix()
-{
-
 }
