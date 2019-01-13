@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 
+#include "Matrix.h"
+#include "UnitTests/TestMatrix.h"
+
 int main()
 {
 	/*
@@ -19,5 +22,12 @@ int main()
 		- feed-forward
 		- output vector to class
 	*/
+
+	testMatrixClass();
 	return 0;
+}
+
+int testMatrixClass()
+{
+
 }

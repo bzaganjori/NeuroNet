@@ -1,20 +1,57 @@
+#include <assert.h>
+
+#include "TestMatrix.h"
 #include "../Matrix.h"
 
-void TestUnitSize()
+void TestUnitSize();
+void TestSize();
+void TestMatrixCopy();
+void TestDispose();
+void TestTranspose();
+void TestInverse();
+void TestAdd();
+void TestSubtract();
+void TestMultiply();
+void TestDivide();
+void TestDotProduct();
+void TestMultiplyScalar();
+void TestKronecker();
+void TestHorizontalConcatenation();
+
+int main()
 {
-    Matrix m = new Matrix();
-    assert(m._rows == 1);
-    assert(m._cols == 1);
+    TestUnitSize();
+    TestSize();
+    TestMatrix();
+    TestDispose();
+    TestTranspose();
+    TestInverse();
+    TestAdd();
+    TestSubtract();
+    TestMultiply();
+    TestDivide();
+    TestDotProduct();
+    TestMultiplyScalar();
+    TestKronecker();
+    TestHorizontalConcatenation();
+    return 1;
 }
 
-void TestSize()
+void TestMatrix::TestUnitSize()
+{
+    Matrix m();
+    assert(m.num_rows() == 1);
+    // assert(m.num_rows() == 1);
+}
+
+/*void TestSize()
 {
     Matrix m = new Matrix(3, 4);
-    assert(m._rows == 3);
-    assert(m._cols == 4);
+    assert(m.num_rows() == 3);
+    assert(m.num_cols() == 4);
 }
 
-void TestMatrix()
+void TestMatrixCopy()
 {
     Matrix m = new Matrix(2, 2);
     m[0][0] = 1;
@@ -82,22 +119,4 @@ void TestKronecker()
 void TestHorizontalConcatenation()
 {
 
-}
-
-int main()
-{
-    TestUnitSize();
-    TestSize();
-    TestMatrix();
-    TestDispose();
-    TestTranspose();
-    TestInverse();
-    TestAdd();
-    TestSubtract();
-    TestMultiply();
-    TestDivide();
-    TestDotProduct();
-    TestMultiplyScalar();
-    TestKronecker();
-    TestHorizontalConcatenation();
-}
+} */

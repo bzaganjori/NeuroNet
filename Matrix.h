@@ -17,13 +17,14 @@ class Matrix
 		Matrix(const Matrix&);
 		~Matrix();
 
-		size_t num_rows();
-		size_t num_cols();
-		
+		size_t num_rows() const { return _rows; };
+		size_t num_cols() const { return _cols; };
+		double** get_elements() const { return elements; };
+
 		/* Simple modifiers */
 		Matrix Transpose();
 		Matrix Inverse();
-		
+
 		/* Basic operations */
 		Matrix Add(const Matrix&);
 		Matrix Subtract(const Matrix&);

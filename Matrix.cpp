@@ -1,72 +1,62 @@
 #include "Matrix.h"
 
-Matrix::Matrix() : _rows(1), _cols(1)
+Matrix::Matrix(void) : _rows(1), _cols(1)
 {
     AllocateMemory();
-    elements[0][0] = 0;
+    this->elements[0][0] = 0;
 }
 
 Matrix::Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols)
 {
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     AllocateMemory();
     for (i = 0; i < _rows; i++)
     {
       for (j = 0; j < _cols; j++)
       {
-        elements[i][j] = 0;
+        this->elements[i][j] = 0;
       }
     }
 }
 
 Matrix::Matrix(const Matrix& m) : _rows(m._rows), _cols(m._cols)
 {
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     AllocateMemory();
     for (i = 0; i < _rows; i++)
     {
       for (j = 0; j < _cols; j++)
       {
-        elements[i][j] = m.elements[i][j];
+        this->elements[i][j] = m.elements[i][j];
       }
     }
 }
 
 Matrix::~Matrix()
 {
-    int i;
+    size_t i;
     for (i = 0; i < _rows; i++)
     {
-      delete[] elements[i];
+      delete[] this->elements[i];
     }
-    delete[] elements;
-}
-
-size_t num_cols()
-{
-  //return _cols;
-}
-
-size_t num_rows()
-{
-  //return _rows;
+    delete[] this->elements;
 }
 
 Matrix Matrix::Transpose()
 {
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     Matrix tempMatrix(_cols, _rows);
     for (i = 0; i < _rows; i++)
     {
         for (j = 0; j < _cols; j++)
         {
-            tempMatrix.elements[j][i] = elements[i][j];
+            tempMatrix.elements[j][i] = this->elements[i][j];
         }
     }
     return tempMatrix;
@@ -79,7 +69,19 @@ Matrix Matrix::Inverse()
 
 Matrix Matrix::Add(const Matrix& m)
 {
-    // TODO
+    size_t i;
+    size_t j;
+
+    // TODO: Assume that both this and m are of same size?
+    Matrix ret(_rows, _cols);
+    for (i = 0; i < _rows; i++)
+    {
+        for (j = 0; j < _cols; j++)
+        {
+            ret[i][j] = this->elements[i][j] + m.elements[i][j];
+        }
+    }
+    return ret;
 }
 
 Matrix Matrix::Subtract(const Matrix& m)
@@ -121,9 +123,9 @@ void Matrix::AllocateMemory()
 {
     int i;
 
-    elements = new double*[_rows];
+    this->elements = new double*[_rows];
     for (i = 0; i < _rows; i++)
     {
-        elements[i] = new double[_cols];
+        this->elements[i] = new double[_cols];
     }
 }

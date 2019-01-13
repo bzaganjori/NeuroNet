@@ -11,13 +11,15 @@ OUTPUT		= OUT.o
 all: $(SOURCE)
 	$(CXX) -o main main.o -L. -lshared
 
+Matrix: Matrix.o
+	$(CXX) -o Matrix Matrix.o
+
+Matrix.o: Matrix.cpp Matrix.h
+	$(CXX) -c Matrix.cpp Matrix.h
+
 libmatrix.so: Matrix.h Matrix.cpp
 	$(CXX) -fPIC -c -shared Matrix.cpp -o Matrix.o
 	$(CXX) -shared -Wl, -soname, libmatrix.so -o libmatrix.o Matrix.o
 
-libgraph.so: GraphPlot.h GraphPlot.cpp
-	$(CXX) -fPIC -c -shared GraphPlot.cpp -o GraphPlot.o
-	$(CXX) -shared -Wl, -soname, libgraph.so -o libgraph.o GraphPlot.o
-
 clean:
-	rm *.so *.o
+	rm -r *.o *.gch
