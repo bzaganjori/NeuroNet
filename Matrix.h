@@ -2,13 +2,12 @@
 #define _MATRIX_H
 
 #include <iostream>
+#include <vector>
 
 class Matrix
 {
 	private:
-		std::size_t _rows;
-		std::size_t _cols;
-		double **elements;
+		std::vector<vector<double> > elements;
 		void AllocateMemory();
 
 	public:
@@ -34,7 +33,12 @@ class Matrix
   		/* Additional operations */
   		double DotProduct(Matrix, Matrix, int);
   		Matrix Multiply_Scalar(int);
-  		Matrix Kronecker_Multiplication(const Matrix&);
+		Matrix Hadamard_Multiplication(const Matrix& m);
+		Matrix Kronecker_Multiplication(const Matrix&);
   		Matrix Horizontal_Concatenation(const Matrix&);
+
+		/* Conversion functions */
+		Matrix OutputToClass();
+		Matrix ClassToOutput();
 };
 #endif

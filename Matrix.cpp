@@ -64,7 +64,7 @@ Matrix Matrix::Transpose()
 
 Matrix Matrix::Inverse()
 {
-    // TODO
+    // TODO: complex
 }
 
 Matrix Matrix::Add(const Matrix& m)
@@ -106,7 +106,36 @@ double Matrix::DotProduct(Matrix m1, Matrix m2, int s)
 
 Matrix Matrix::Multiply_Scalar(int s)
 {
-    // TODO
+    size_t i;
+    size_t j;
+
+    Matrix ret(_rows, _cols);
+    for (i = 0; i < _rows; i++)
+    {
+        for (j = 0; j < _rows; j++)
+        {
+            ret[i][j] = this->elements[i][j] * s;
+        }
+    }
+
+    return ret;
+}
+
+Matrix Matrix::Hadamard_Multiplication(const Matrix& m)
+{
+    size_t i;
+    size_t j;
+
+    Matrix ret(_rows, _cols);
+    for (i = 0; i < _rows; i++)
+    {
+        for (j = 0; j < _rows; j++)
+        {
+            ret[i][j] = this->elements[i][j] * m.elements[i][j];
+        }
+    }
+
+    return ret;
 }
 
 Matrix Matrix::Kronecker_Multiplication(const Matrix& m)
@@ -117,6 +146,34 @@ Matrix Matrix::Kronecker_Multiplication(const Matrix& m)
 Matrix Matrix::Horizontal_Concatenation(const Matrix&)
 {
     // TODO
+}
+
+Matrix Matrix::OutputToClass()
+{
+    size_t i;
+    size_t j;
+    int index;
+
+    Matrix ret(_rows, 1);
+    for (i = 0; i < _rows; i++)
+    {
+        for (j = 0; j < _cols; j++)
+        {
+            if (this->elements[i][j] == 1)
+            {
+                index = j;
+                break;
+            }
+        }
+        ret[i][0] = index;
+    }
+
+    return ret;
+}
+
+Matrix Matrix::ClassToOutput()
+{
+    // TODO:
 }
 
 void Matrix::AllocateMemory()
