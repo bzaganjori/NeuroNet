@@ -11,13 +11,13 @@ BIN_NAME = main
 
 all:
 
-tests: dirs matrix
+tests: matrix
 	echo "Compiling unit tests..."
 	$(CXX) $(FLAGS) -o $(BUILD_PATH)/Test.o $(SRC_PATH)/UnitTests/TestMatrix.cpp
+	$(CXX) -o test $(BUILD_PATH)/Matrix.o $(BUILD_PATH)/Test.o
 
-matrix:
-	echo "Compling Matrix files..."
-	$(CXX) $(FLAGS) -c $(INCLUDE_PATH)/Matrix.h $(SRC_PATH)/Matrix.cpp
+matrix: dirs
+	$(CXX) $(FLAGS) -o $(BUILD_PATH)/Matrix.o -c $(SRC_PATH)/Matrix.cpp
 
 dirs:
 	echo "Creating directories..."

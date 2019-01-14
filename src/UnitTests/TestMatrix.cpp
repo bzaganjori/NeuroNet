@@ -1,7 +1,6 @@
 #include <assert.h>
 
-#include "TestMatrix.h"
-#include "../Matrix.h"
+#include "../../include/Matrix.h"
 
 void TestUnitSize();
 void TestSize();
@@ -22,7 +21,7 @@ int main()
 {
     TestUnitSize();
     TestSize();
-    TestMatrix();
+    TestMatrixCopy();
     TestDispose();
     TestTranspose();
     TestInverse();
@@ -37,33 +36,18 @@ int main()
     return 1;
 }
 
-void TestMatrix::TestUnitSize()
+void TestUnitSize()
 {
-    Matrix m;
-    assert(m.rows() == 1);
-    assert(m.cols() == 1);
+    std::cout << "something";
 }
 
-/*void TestSize()
+void TestSize()
 {
-    Matrix m = new Matrix(3, 4);
-    assert(m.num_rows() == 3);
-    assert(m.num_cols() == 4);
 }
 
 void TestMatrixCopy()
 {
-    Matrix m = new Matrix(2, 2);
-    m[0][0] = 1;
-    m[0][1] = 2;
-    m[1][0] = 3;
-    m[1][1] = 4;
-
-    Matrix newM = new Matrix(m);
-    assert(newM[0][0] == 1);
-    assert(newM[0][1] == 2);
-    assert(newM[1][0] == 3);
-    assert(newM[1][1] == 4);
+    // TODO
 }
 
 void TestDispose()
@@ -119,4 +103,4 @@ void TestKronecker()
 void TestHorizontalConcatenation()
 {
 
-} */
+}
