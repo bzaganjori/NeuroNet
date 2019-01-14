@@ -71,12 +71,36 @@ Matrix Matrix::Add(const Matrix& m)
 
 Matrix Matrix::Subtract(const Matrix& m)
 {
-    // TODO
+    int i;
+    int j;
+
+    Matrix ret(rows(), cols());
+    for (i = 0; i < rows(); i++)
+    {
+        for (j = 0; j < cols(); j++)
+        {
+            ret.elements[i][j] = elements[i][j] - m.elements[i][j];
+        }
+    }
+
+    return ret;
 }
 
 Matrix Matrix::Multiply(const Matrix& m)
 {
-    // TODO
+    int i;
+    int j;
+
+    Matrix ret(rows(), cols());
+    for (i = 0; i < rows(); i++)
+    {
+        for (j = 0; j < cols(); j++)
+        {
+            ret.elements[i][j] = elements[i][j] * m.elements[i][j];
+        }
+    }
+
+    return ret;
 }
 
 Matrix Matrix::Divide(const Matrix& m)
@@ -102,6 +126,7 @@ Matrix Matrix::Multiply_Scalar(int s)
             ret.elements[i][j] = elements[i][j] * s;
         }
     }
+    
     return ret;
 }
 
