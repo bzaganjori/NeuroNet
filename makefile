@@ -1,25 +1,32 @@
-CC			= gcc
-CXX			= g++
-CFLAGS		= -g -fPIC
-CXXFLAGS	= -g -fPIC
-OFLAG		= -o
-LDL			= -ldl
-HEADERS		= *.h
-SOURCE		= *.cpp
-OUTPUT		= OUT.o
+CXX	= g++
+LDL = -ldl
+FLAGS = -g -Wall
 
-all: $(SOURCE)
-	$(CXX) -o main main.o -L. -lshared
+# PATHS #
+SRC_PATH = src
+INCLUDE_PATH = include
+BUILD_PATH = build
+BIN_PATH = $(BUILD_PATH)/bin
+BIN_NAME = main
 
-Matrix: Matrix.o
-	$(CXX) -o Matrix Matrix.o
+all:
 
-Matrix.o: Matrix.cpp Matrix.h
-	$(CXX) -c Matrix.cpp Matrix.h
+tests: dirs matrix
+	echo "Compiling unit tests..."
+	$(CXX) $(FLAGS) -o $(BUILD_PATH)/Test.o $(SRC_PATH)/UnitTests/TestMatrix.cpp
 
-libmatrix.so: Matrix.h Matrix.cpp
-	$(CXX) -fPIC -c -shared Matrix.cpp -o Matrix.o
-	$(CXX) -shared -Wl, -soname, libmatrix.so -o libmatrix.o Matrix.o
+matrix:
+	echo "Compling Matrix files..."
+	$(CXX) $(FLAGS) -c $(INCLUDE_PATH)/Matrix.h $(SRC_PATH)/Matrix.cpp
+
+dirs:
+	echo "Creating directories..."
+	mkdir -p $(BUILD_PATH)
+	mkdir -p $(BIN_PATH)
 
 clean:
-	rm -r *.o *.gch
+	echo "Deleting directories..."
+	rm -r $(BUILD_PATH)
+
+main:
+	$(CXX) -o Main -c ./Main.cpp

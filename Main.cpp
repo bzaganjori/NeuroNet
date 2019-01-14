@@ -23,11 +23,5 @@ int main()
 		- output vector to class
 	*/
 
-	testMatrixClass();
 	return 0;
-}
-
-int testMatrixClass()
-{
-
 }
